@@ -17,7 +17,6 @@ limitations under the License.
 package mcnutils
 
 import (
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -27,7 +26,7 @@ import (
 func TestCopyFile(t *testing.T) {
 	testStr := "test-machine"
 
-	srcFile, err := ioutil.TempFile("", "machine-test-")
+	srcFile, err := os.CreateTemp("", "machine-test-")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -44,7 +43,7 @@ func TestCopyFile(t *testing.T) {
 
 	srcFilePath := filepath.Join(os.TempDir(), srcFi.Name())
 
-	destFile, err := ioutil.TempFile("", "machine-copy-test-")
+	destFile, err := os.CreateTemp("", "machine-copy-test-")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -62,7 +61,7 @@ func TestCopyFile(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	data, err := ioutil.ReadFile(destFilePath)
+	data, err := os.ReadFile(destFilePath)
 	if err != nil {
 		t.Fatal(err)
 	}

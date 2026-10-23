@@ -19,7 +19,7 @@ package persist
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -35,7 +35,7 @@ func cleanup() {
 }
 
 func getTestStore() Filestore {
-	tmpDir, err := ioutil.TempDir("", "machine-test-")
+	tmpDir, err := os.MkdirTemp("", "machine-test-")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -67,7 +67,7 @@ func TestStoreSave(t *testing.T) {
 		t.Fatalf("Host path doesn't exist: %s", path)
 	}
 
-	files, _ := ioutil.ReadDir(path)
+	files, _ := os.ReadDir(path)
 	for _, f := range files {
 		r := regexp.MustCompile("config.json.tmp*")
 		if r.MatchString(f.Name()) {
@@ -97,7 +97,7 @@ func TestStoreSaveOmitRawDriver(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	configData, err := ioutil.ReadAll(f)
+	configData, err := io.ReadAll(f)
 	if err != nil {
 		t.Fatal(err)
 	}

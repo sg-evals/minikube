@@ -18,7 +18,6 @@ package ssh
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"runtime"
 	"testing"
@@ -65,7 +64,7 @@ func TestGetSSHCmdArgs(t *testing.T) {
 }
 
 func TestNewExternalClient(t *testing.T) {
-	keyFile, err := ioutil.TempFile("", "docker-machine-tests-dummy-private-key")
+	keyFile, err := os.CreateTemp("", "docker-machine-tests-dummy-private-key")
 	if err != nil {
 		t.Fatal(err)
 	}

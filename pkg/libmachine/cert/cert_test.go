@@ -17,14 +17,13 @@ limitations under the License.
 package cert
 
 import (
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
 )
 
 func TestGenerateCACertificate(t *testing.T) {
-	tmpDir, err := ioutil.TempDir("", "machine-test-")
+	tmpDir, err := os.MkdirTemp("", "machine-test-")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -48,7 +47,7 @@ func TestGenerateCACertificate(t *testing.T) {
 }
 
 func TestGenerateCert(t *testing.T) {
-	tmpDir, err := ioutil.TempDir("", "machine-test-")
+	tmpDir, err := os.MkdirTemp("", "machine-test-")
 	if err != nil {
 		t.Fatal(err)
 	}

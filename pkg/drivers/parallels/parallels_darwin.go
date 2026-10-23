@@ -41,7 +41,6 @@ package parallels
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net"
 	"os"
 	"path/filepath"
@@ -630,7 +629,7 @@ func (d *Driver) getIPfromDHCPLease() (string, error) {
 		return "", fmt.Errorf("Not a valid MAC address: %s. It should be exactly 12 digits.", mac)
 	}
 
-	leases, err := ioutil.ReadFile(DHCPLeaseFile)
+	leases, err := os.ReadFile(DHCPLeaseFile)
 	if err != nil {
 		return "", err
 	}

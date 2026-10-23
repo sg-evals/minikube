@@ -19,7 +19,6 @@ package log
 import (
 	"bufio"
 	"io"
-	"io/ioutil"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -58,14 +57,14 @@ func TestSetDebugToFalse(t *testing.T) {
 
 func TestSetOut(t *testing.T) {
 	testLogger := NewFmtMachineLogger().(*FmtMachineLogger)
-	testLogger.SetOutWriter(ioutil.Discard)
-	assert.Equal(t, ioutil.Discard, testLogger.outWriter)
+	testLogger.SetOutWriter(io.Discard)
+	assert.Equal(t, io.Discard, testLogger.outWriter)
 }
 
 func TestSetErr(t *testing.T) {
 	testLogger := NewFmtMachineLogger().(*FmtMachineLogger)
-	testLogger.SetErrWriter(ioutil.Discard)
-	assert.Equal(t, ioutil.Discard, testLogger.errWriter)
+	testLogger.SetErrWriter(io.Discard)
+	assert.Equal(t, io.Discard, testLogger.errWriter)
 }
 
 func TestDebug(t *testing.T) {
